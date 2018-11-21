@@ -20,7 +20,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        type: 'Low',
+        type: 'High',
         min: 6001,
         max: 10000,
         interest: 0.03,
