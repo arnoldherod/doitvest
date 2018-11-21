@@ -1,0 +1,23 @@
+{
+  "name": "doitvest",
+  "version": "1.0.0",
+  "description": "Phase 1 Pair Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnoldherod/doitvest.git"
+  },
+  "author": "Arnold & Zia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arnoldherod/doitvest/issues"
+  },
+  "homepage": "https://github.com/arnoldherod/doitvest#readme",
+  "dependencies": {
+    "pg": "^7.6.1",
+    "sequelize": "^4.41.2"
+  }
+}
