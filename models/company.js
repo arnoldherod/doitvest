@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     interest: {
       type: DataTypes.INTEGER,
       defaultValue: null
-    }
+    },
+    password: DataTypes.STRING
   }, {});
   Company.associate = function(models) {
     // associations can be defined here
