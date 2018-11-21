@@ -6,7 +6,7 @@
 </style>
 <body>
     <%- include ./partials/navbar.ejs %>
-    <form action="action_page.php" method="POST" style="border:1px solid #ccc">
+    <form action="/investors/signUpInvestor" method="POST" style="border:1px solid #ccc">
             <div class="container">
               <h1>Sign Up</h1>
               <p>Please fill in this form to create an account.</p>
@@ -25,7 +25,7 @@
               <input type="integer" placeholder="Enter the desired amount of money" name="invest" required>
             
               <b>Risk</b><br>
-              <select name:"Risk">
+              <select name="risk">
                   <% data.forEach((risk, iRisk) => { %>
                   <option value="<%=iRisk+1%>"><%=risk%></option>
                   <%})%>

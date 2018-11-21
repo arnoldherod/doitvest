@@ -3,7 +3,7 @@ const companyController = require('../controllers/companyController')
 const View = require('../views/view')
 
 routes.get('/', function(req, res){
-    res.render("Welcoming Companies to DoItVest")
+    res.send("Welcoming Companies to DoItVest")
 })
 
 routes.get('/signup', function(req,res){
