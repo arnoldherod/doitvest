@@ -4,24 +4,13 @@ const View = require('../views/view')
 const {checkPassword} = require('../helpers/hashPassword')
 
 routes.get('/', function(req, res){
-    res.send("Welcoming Companies to DoItVest")
+    let sInfo = req.query.sInfo
+    res.send("Welcoming Companies to DoItVest", {success: sInfo})
 })
 
 routes.get('/signup', function(req,res){
     let eInfo = req.query.eInfo
-    let sInfo = req.query.sInfo
-    res.render("signUpCompanies.ejs", {noEmail: eInfo, success: sInfo})
-})
-
-routes.post('/signup', function(req,res){
-    // res.send(req.body)
-    companyController.addCompany(req.body)
-    .then( data => {
-        res.redirect("/")
-    })
-    .catch( err => {
-        res.send(err)
-    })
+    res.render("signUpCompanies.ejs", {noEmail: eInfo})
 })
 
 routes.post('/signin', function(req,res){
@@ -33,12 +22,16 @@ routes.post('/signin', function(req,res){
         }
         else if(data){
             if(checkPassword(req.body.psw, data.password)){
-                req.session.Company ={
+                req.session.Company = {
                     data
                 }
                 // res.send(req.session)
                 let success = "Sucessfully signed in"
-                res.redirect(`/companies/signup?sInfo=${success}`)
+                res.redirect(`/?sInfo=${success}`)
+            }
+            else{
+                let passErr = "Incorrect Password"
+                res.redirect(`/companies/signup?eInfo=${passErr}`)
             }
         }
     })

@@ -4,6 +4,7 @@ const homeRoute = require('./routes')
 const companyRoute = require('./routes/companies')
 const investorRoute = require('./routes/investors')
 const session = require('express-session')
+const format$ = require('./helpers/moneyFormat')
 
 let bodyParser = require('body-parser')
 
@@ -16,6 +17,7 @@ app.use(session({secret: "doitvest"}))
 
 app.use(function(req, res, next){
     res.locals.session = req.session
+    res.locals.format$ = format$
     next();
 });
 
