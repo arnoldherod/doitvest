@@ -3,6 +3,7 @@ let app = express()
 const homeRoute = require('./routes')
 const companyRoute = require('./routes/companies')
 const investorRoute = require('./routes/investors')
+
 let bodyParser = require('body-parser')
 
 app.use(bodyParser.json())

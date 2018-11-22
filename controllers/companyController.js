@@ -13,7 +13,7 @@ class companyController {
                     email: input.email,
                     borrowed: input.amount,
                     duration: input.duration,
-                    password: input.psw//NEED TO THE INPUT.PASSWORD
+                    password: input.psw
                 }
             )
             .then(data => {

@@ -14,7 +14,7 @@ routes.post('/signup', function(req,res){
     // res.send(req.body)
     companyController.addCompany(req.body)
     .then( data => {
-        res.send(data.dataValues)
+        res.redirect("/")
     })
     .catch( err => {
         res.send(err)

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     interest: DataTypes.FLOAT
   }, {});
   Risk.associate = function(models) {
-    // associations can be defined here
+    Risk.hasMany(models.Investor, {foreignKey: "riskId"})
   };
   return Risk;
 };

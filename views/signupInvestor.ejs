@@ -27,7 +27,7 @@
               <b>Risk</b><br>
               <select name="risk">
                   <% data.forEach((risk, iRisk) => { %>
-                  <option value="<%=iRisk+1%>"><%=risk%></option>
+                  <option value="<%= risk.id %>"><%=risk.type%></option>
                   <%})%>
               </select>
               <br>
