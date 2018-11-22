@@ -9,6 +9,7 @@ routes.get('/', function(req, res){
 
     res.send("Welcome Investor of DoItVest",{success: sInfo})
 })
+
 routes.get('/signupinvestor',function(req,res){
     let eInfo = req.query.eInfo
 
@@ -23,6 +24,16 @@ routes.get('/signupinvestor',function(req,res){
         })  
 })
 
+routes.post('/signupinvestor', function(req,res){
+    // res.send(req.body)
+    investorController.addInvestor(req.body)
+    .then( data => {
+        res.redirect("/")
+    })
+    .catch( err => {
+        res.send(err)
+    })
+})
 
 routes.get('/profile', function(req,res){
     investorController.allCompanies()
@@ -61,6 +72,10 @@ routes.post('/signin', function(req,res){
         res.send(err)
     })
 })
+
+routes.get('/approve/:id', function(req, res){
+    res.render("formApproved.ejs")
+}),
 
 
 module.exports = routes
