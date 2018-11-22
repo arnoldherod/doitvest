@@ -10,7 +10,7 @@
           <li><a href="/investors/profile"><%= session.Investor.data.name %>'s profile</a></li>
         <%} %>
         <% if(session.Company) { %>
-        <li><a href="#"><%= session.Company.data.name %>'s profile</a></li>
+        <li><a href="/companies/approve/"><%= session.Company.data.name %>'s profile</a></li>
         <% } %>
         <% if(session.Company || session.Investor) { %>
           <li><a href="/?signout=y">Sign Out</a></li>

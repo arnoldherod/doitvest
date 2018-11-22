@@ -1,15 +1,15 @@
-<html>
+<!-- <html>
 <%- include ./partials/headers.ejs %>
 <%- include ./partials/navbar.ejs %>
 </head>
 <body>
 
-<% if(session.Investor){ %>
+<% if(session.Company){ %>
     <table style="width: 100% ">
             <tr>
                 <th style="text-align: center">ID</th>
                 <th style="text-align: center">Your Name</th>
-                <th style="text-align: center">Your Investment</th>
+                <th style="text-align: center">You Invested</th>
             </tr>
                 
             <tr>
@@ -23,7 +23,6 @@
 <br>
 <br>
 
-<h2 style="text-align: center"> Companies Available to Invest</h2>
 <table style="width: 100% ">
     <tr>
         <th style="text-align: center">No</th>
@@ -37,9 +36,9 @@
         <td style="text-align: center"><%= iComp+1 %></td>
         <td style="text-align: center"><%= allCompanies[iComp].name %></td>
         <td style="text-align: center"><%= format$(allCompanies[iComp].borrowed) %></td>
-        <th style="text-align: center"><a href="/investors/approve?cId=<%= allCompanies[iComp].id %>">Approved</a></th>
+        <th style="text-align: center"><a href="/investors/approve/<%= allCompanies[iComp].id %>">Approved</a></th>
     </tr>
     <% } %>
 </table>
 </body>
-</html>
+</html> -->

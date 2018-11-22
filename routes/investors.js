@@ -1,13 +1,30 @@
 let routes = require('express').Router()
 const riskController = require('../controllers/riskController')
 const investorController = require('../controllers/investorController')
+const companyController = require('../controllers/companyController')
 const {checkPassword} = require('../helpers/hashPassword')
+const nodemailer = require('nodemailer')
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth:
+    {
+        user: `gamecowo12345@gmail.com`,
+        pass:`gamecowo54321`
+    }
+})
+
+var mailOptions = {
+    from: 'gamecowo12345@gmail.com',
+    to: 'arnold.herod@yahoo.co.id',
+    subject: 'Confirmation Email from DoItVest',
+    text: 'Thank you for joining us as an Investor, This email proved your membership with our company!'
+}
 
 
 routes.get('/', function(req, res){
-    let sInfo = req.query.sInfo
 
-    res.send("Welcome Investor of DoItVest",{success: sInfo})
+
+    res.render("Welcome Investor of DoItVest")
 })
 
 routes.get('/signupinvestor',function(req,res){
@@ -73,9 +90,44 @@ routes.post('/signin', function(req,res){
     })
 })
 
-routes.get('/approve/:id', function(req, res){
-    res.render("formApproved.ejs")
-}),
+routes.get('/approve', function(req, res){
+    // res.send(req.query.cId)
+    companyController.findOne(req.query.cId)
+    .then( data => {
+        // res.send(data)
+        res.render("formApproved.ejs", {company: data, amount: data.borrowed})
+    })
+    .catch( err => {
+        res.send(err)
+    })
+})
+
+routes.post('/approve', function(req,res){
+    let invested = req.body.invested
+    let cId = req.query.cId
+    let iId = req.session.Investor.data.id
+    investorController.addConj(iId, invested, cId)
+    .then(data => {
+        return companyController.findOne(cId)
+        .then(company => {
+            let email = company.email
+            mailOptions.to = email 
+            transporter.sendMail(mailOptions, function(err, info){
+                if(err){
+                    res.send(err)
+                }
+                else{
+                    let obj = `Confirmation Email Sent`
+                    res.redirect(`/?sInfo=${obj}`)
+                }
+            })
+
+        })
+    })
+    .catch(err => {
+        res.send("ERROR COI!!!!!!!! GRRAAAA")
+    })
+})
 
 
 module.exports = routes

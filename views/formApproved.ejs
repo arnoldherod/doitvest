@@ -5,20 +5,19 @@
 </head>
 <body>
     <% include ./partials/navbar %>
-    <form action="/" method="POST" style="border:1px solid #ccc">
+    <form action="/investors/approve?cId=<%=company.id%>" method="POST" style="border:1px solid #ccc">
         <div class="container">
-          <h1>Approve Form</h1>
+          <h1>Approval Form</h1>
         
           <label for="name"><b>Company </b></label><br>
-          <input type="string" value="test" name="name" readonly>
+          <input type="string" value="<%= company.name %>" name="name" readonly>
             <br>
           <label for="borrowed"><b>Amount Requested</b></label><br>
-          <input type="integer" value="100000" name="borrowed" readonly>
+          <input type="integer" value="<%= company.borrowed%>" name="borrowed" readonly>
             <br>
             <b>Invest Amount</b><br>
-                <select name="amount">
-                    <option></option>
-                  <% for(var i = 300 ; i < 1000 ; i += 100){ %>
+                <select name="invested">
+                  <% for(var i = 100 ; i<=company.borrowed ; i += 100){ %>
                     <option value="<%= i %>"><%=i%></option>
                   <%}%>
                 </select>

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   const Company = sequelize.define('Company', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    borrowed: DataTypes.INTEGER,
+    borrowed: {type: DataTypes.INTEGER, validate:{min: 100}},
     duration: DataTypes.INTEGER,
     interest: {
       type: DataTypes.FLOAT,
