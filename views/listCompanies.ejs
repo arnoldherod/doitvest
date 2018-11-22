@@ -1,7 +1,26 @@
 <html>
 <%- include ./partials/headers.ejs %>
 <%- include ./partials/navbar.ejs %>
+</head>
 <body>
+
+<% if(session.Investors){ %>
+    <table style="width: 100% ">
+            <tr>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Your Name</th>
+                <th style="text-align: center">Amount Invested</th>
+            </tr>
+                
+            <tr>
+                <td style="text-align: center"><%= session.Investors.id %></td>
+                <td style="text-align: center"><%= allCompanies[iComp].name %></td>
+                <td style="text-align: center"><%= allCompanies[iComp].invest %></td>
+            </tr>
+        </table>
+<% } %>
+
+
 <table style="width: 100% ">
     <tr>
         <th style="text-align: center">No</th>

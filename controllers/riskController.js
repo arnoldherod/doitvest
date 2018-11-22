@@ -11,7 +11,6 @@ class riskControllers{
         .catch((err)=>{
            reject(err)
         })
-
     })
  }
 

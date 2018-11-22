@@ -1,0 +1,33 @@
+<html>
+  <%- include ./partials/headers %>
+  <%- include ./partials/signUpStyle %>
+</style>
+<body>
+  <%- include ./partials/navbar %>
+
+
+  <% if(noEmail) { %>
+    <h1><%= noEmail %></h1>
+    <% }%>
+    
+<form action="/companies/signin" method="POST" style="border:1px solid #ccc">
+<div class="container">
+  <h1>Sign In</h1>
+
+  <label for="email"><b>Email</b></label><br>
+  <input type="email" placeholder="Enter Email" name="email" required>
+
+  <label for="psw"><b>Password</b></label><br>
+  <input type="password" placeholder="Enter Password" name="psw" required>
+
+  <label>
+    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+  </label>
+
+  <div class="clearfix">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <button type="submit" class="signupbtn">Sign In</button>
+  </div>
+</div>
+</form> 
+</html>
