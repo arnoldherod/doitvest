@@ -25,11 +25,23 @@ class companyController {
         })
     }
 
-    static findOne(param){
+    static findOne(input){
         return new Promise((resolve, reject) => {
-            Company.findOne(param)
+            Company.findByPk(input)
             .then(dataList =>{
                 resolve(dataList)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
+    }
+
+    static findEmail(param){
+        return new Promise((resolve, reject) => {
+            Company.findOne(param)
+            .then(data => {
+                resolve(data)
             })
             .catch(err => {
                 reject(err)

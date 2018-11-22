@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   const Investor = sequelize.define('Investor', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    invest: DataTypes.INTEGER,
+    invest: {type: DataTypes.INTEGER, validate: {min: 100}},
     password: DataTypes.STRING,
     riskId: DataTypes.INTEGER
   }, {});
@@ -16,5 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   Investor.beforeCreate((input, options) => {
     input.password = getPassword(input.password) 
   })
+
+  Investor.prototype.formatUang = function(){
+    return `Rp. ${new Intl.NumberFormat(['id'], {maximumSignificantDigist: 3}).format(this.invest)}`
+  }
+
   return Investor;
 };
