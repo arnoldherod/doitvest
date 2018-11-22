@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/arnoldherod/doitvest#readme",
   "dependencies": {
+    "express-session": "^1.15.6",
     "pg": "^7.6.1",
     "sequelize": "^4.41.2"
   }

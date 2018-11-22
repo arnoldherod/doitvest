@@ -3,6 +3,7 @@ let app = express()
 const homeRoute = require('./routes')
 const companyRoute = require('./routes/companies')
 const investorRoute = require('./routes/investors')
+const session = require('express-session')
 
 let bodyParser = require('body-parser')
 
@@ -10,6 +11,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
 
 app.set("view engine", "ejs")
+
+app.use(session({secret: "doitvest"}))
 
 app.use('/', homeRoute)
 app.use('/companies', companyRoute)
