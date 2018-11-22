@@ -13,6 +13,17 @@ routes.get('/signup', function(req,res){
     res.render("signUpCompanies.ejs", {noEmail: eInfo})
 })
 
+routes.post('/signup', function(req,res){
+    // res.send(req.body)
+    companyController.addCompany(req.body)
+    .then( data => {
+        res.redirect("/")
+    })
+    .catch( err => {
+        res.send(err)
+    })
+})
+
 routes.post('/signin', function(req,res){
     companyController.findOne({where: {email: req.body.email}})
     .then(data => {
