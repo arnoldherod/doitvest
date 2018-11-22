@@ -8,7 +8,9 @@ routes.get('/', function(req, res){
 })
 
 routes.get('/signup', function(req,res){
-    res.render("signUpCompanies.ejs")
+    let eInfo = req.query.eInfo
+    let sInfo = req.query.sInfo
+    res.render("signUpCompanies.ejs", {noEmail: eInfo, success: sInfo})
 })
 
 routes.post('/signup', function(req,res){
@@ -22,27 +24,21 @@ routes.post('/signup', function(req,res){
     })
 })
 
-routes.get('/signin', function(req,res){
-    let eInfo = req.query.eInfo
-    // res.send(eInfo)
-    res.render("signinCompany.ejs", {noEmail: eInfo})
-})
-
 routes.post('/signin', function(req,res){
     companyController.findOne({where: {email: req.body.email}})
     .then(data => {
         if(!data){
             let noEmail = "No Email Found"
-            res.redirect(`/companies/signin?eInfo=${noEmail}`)
+            res.redirect(`/companies/signup?eInfo=${noEmail}`)
         }
         else if(data){
             if(checkPassword(req.body.psw, data.password)){
                 req.session.Company ={
                     data
                 }
+                // res.send(req.session)
                 let success = "Sucessfully signed in"
-                res.redirect(`/companies/signin?sInfo=${success}`)
-
+                res.redirect(`/companies/signup?sInfo=${success}`)
             }
         }
     })

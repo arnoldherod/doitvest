@@ -14,6 +14,11 @@ app.set("view engine", "ejs")
 
 app.use(session({secret: "doitvest"}))
 
+app.use(function(req, res, next){
+    res.locals.session = req.session
+    next();
+});
+
 app.use('/', homeRoute)
 app.use('/companies', companyRoute)
 app.use('/investors', investorRoute)

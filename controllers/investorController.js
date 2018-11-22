@@ -33,6 +33,18 @@ class investorController{
             })
         })
     }
+    static findInvestor(input){
+        return new Promise((resolve,project) => {
+            Investor.findOne(input)
+            .then((data)=>{
+                resolve(data)
+            })
+            .catch((err)=>{
+                reject(err)
+            })
+        })
+
+    }
 
 }
 
