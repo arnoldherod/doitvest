@@ -1,0 +1,23 @@
+<html>
+<%- include ./partials/headers.ejs %>
+<%- include ./partials/navbar.ejs %>
+<body>
+<table style="width: 100% ">
+    <tr>
+        <th style="text-align: center">No</th>
+        <th style="text-align: center">Company Name</th>
+        <th style="text-align: center">Amount Requested</th>
+        <th style="text-align: center">Options</th>
+    </tr>
+        
+        <% for(let iComp = 0 ; iComp<allCompanies.length ; iComp++) {%>
+    <tr>
+        <td style="text-align: center"><%= iComp+1 %></td>
+        <td style="text-align: center"><%= allCompanies[iComp].name %></td>
+        <td style="text-align: center"><%= allCompanies[iComp].borrowed %></td>
+        <th style="text-align: center"><a href="/companies/approve/<%= allCompanies[iComp].id %>">Approved</a></th>
+    </tr>
+    <% } %>
+</table>
+</body>
+</html>

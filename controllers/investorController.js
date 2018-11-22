@@ -1,5 +1,7 @@
 const Model = require('../models/index')
 const Investor = Model.Investor
+const Company = Model.Company
+
 class investorController{
     static addInvestor(input){
         return new Promise((resolve,reject)=>{
@@ -8,8 +10,8 @@ class investorController{
                 name: input.name,
                 email: input.email,
                 invest: input.invest,
-                risk: input.risk,
-                password: input.psw//NEED TO THE INPUT.PASSWORD
+                riskId: input.risk,
+                password: input.psw
             })
             .then((data)=> {
                 resolve(data)
@@ -20,6 +22,17 @@ class investorController{
         })
     }
 
+    static allCompanies(){
+        return new Promise((resolve, reject) => {
+            Company.findAll()
+            .then(dataList => {
+                resolve(dataList)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
+    }
 
 }
 

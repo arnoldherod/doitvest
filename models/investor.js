@@ -1,4 +1,6 @@
 'use strict';
+const {getPassword} = require('../helpers/hashPassword')
+
 module.exports = (sequelize, DataTypes) => {
   const Investor = sequelize.define('Investor', {
     name: DataTypes.STRING,
@@ -8,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     riskId: DataTypes.INTEGER
   }, {});
   Investor.associate = function(models) {
-    // associations can be defined here
+    Investor.belongsTo(models.Risk, {foreignKey: "riskId"})
   };
+
+  Investor.beforeCreate((input, options) => {
+    input.password = getPassword(input.password) 
+  })
   return Investor;
 };

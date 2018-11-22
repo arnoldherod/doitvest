@@ -8,6 +8,7 @@ module.exports = {
         email: `jail412@hotmail.com`,
         borrowed: 100000,
         duration: 12,
+        password: "test",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -16,6 +17,7 @@ module.exports = {
         email: `jklsh@hotmail.com`,
         borrowed: 100,
         duration: 1,
+        password: "test",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -24,6 +26,7 @@ module.exports = {
         email: `def@hotmail.com`,
         borrowed: 1000,
         duration: 7,
+        password: "test",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -32,6 +35,7 @@ module.exports = {
         email: `Miwon@snail.com`,
         borrowed: 1500,
         duration: 9,
+        password: "test",
         createdAt: new Date(),
         updatedAt: new Date()
       },
