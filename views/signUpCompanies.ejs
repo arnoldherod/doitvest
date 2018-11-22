@@ -5,12 +5,11 @@
 <body>
   <%- include ./partials/navbar %>
 
-
   <% if(noEmail) { %>
     <h1><%= noEmail %></h1>
     <% }%>
     
-<form action="/" method="POST" style="border:1px solid #ccc">
+<form action="/companies/signin" method="POST" style="border:1px solid #ccc">
 <div class="container">
   <h1>Sign In</h1>
 
@@ -32,8 +31,7 @@
 </form> 
 
 
-
-<% if(!success){ %>
+<% if(!session.Company){ %>
   <form action="/companies/signup" method="POST" style="border:1px solid #ccc">
     <div class="container">
       <h1>Sign Up</h1>

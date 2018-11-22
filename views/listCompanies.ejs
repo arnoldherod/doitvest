@@ -4,22 +4,24 @@
 </head>
 <body>
 
-<% if(session.Investors){ %>
+<% if(session.Investor){ %>
     <table style="width: 100% ">
             <tr>
                 <th style="text-align: center">ID</th>
                 <th style="text-align: center">Your Name</th>
-                <th style="text-align: center">Amount Invested</th>
+                <th style="text-align: center">You Invested</th>
             </tr>
                 
             <tr>
-                <td style="text-align: center"><%= session.Investors.id %></td>
-                <td style="text-align: center"><%= allCompanies[iComp].name %></td>
-                <td style="text-align: center"><%= allCompanies[iComp].invest %></td>
+                <td style="text-align: center"><%= session.Investor.data.id %></td>
+                <td style="text-align: center"><%= session.Investor.data.name %></td>
+                <td style="text-align: center"><%= format$(session.Investor.data.invest) %></td>
             </tr>
         </table>
 <% } %>
-
+<br>
+<br>
+<br>
 
 <table style="width: 100% ">
     <tr>
@@ -33,7 +35,7 @@
     <tr>
         <td style="text-align: center"><%= iComp+1 %></td>
         <td style="text-align: center"><%= allCompanies[iComp].name %></td>
-        <td style="text-align: center"><%= allCompanies[iComp].borrowed %></td>
+        <td style="text-align: center"><%= format$(allCompanies[iComp].borrowed) %></td>
         <th style="text-align: center"><a href="/companies/approve/<%= allCompanies[iComp].id %>">Approved</a></th>
     </tr>
     <% } %>
