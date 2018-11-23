@@ -48,5 +48,32 @@ class companyController {
             })
         })
     }
+
+    static updatePassword(obj,where){
+        return new Promise((resolve,reject)=>{
+            Company.update(obj,where)
+            .then((data)=>{
+                // console.log(data, '+==============================================')
+                resolve(data)
+            })
+            .catch((err)=>{
+                reject(err)
+            })
+        })
+     }
+
+    static deleteCompany(param){
+        console.log(param, "++++++++++++++")
+        return new Promise((resolve, reject) =>{
+            Company.destroy(param)
+            .then(() => {
+                resolve(null)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+        })
+    }
+    
 }
 module.exports = companyController

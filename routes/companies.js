@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const companyController = require('../controllers/companyController')
 const View = require('../views/view')
-const {checkPassword} = require('../helpers/hashPassword')
+const {checkPassword, getPassword} = require('../helpers/hashPassword')
 
 routes.get('/', function(req, res){
     let sInfo = req.query.sInfo
@@ -12,19 +12,6 @@ routes.get('/signup', function(req,res){
     let eInfo = req.query.eInfo
     res.render("signUpCompanies.ejs", {noEmail: eInfo})
 })
-
-// routes.post('/signup', function(req,res){
-//     // res.send(req.body)
-//     companyController.addCompany(req.body)
-//     .then( data => {
-//         res.redirect("/")
-//     })
-//     .catch( err => {
-//         res.send(err)
-//     })
-// })
-
-
 
 
 routes.post('/signup', function(req,res){
@@ -82,5 +69,39 @@ routes.post('/signin', function(req,res){
     })
 })
 
+routes.get('/edit/:id',function (req,res){
+    res.render('editCompany.ejs')
+})
+
+routes.post('/edit/:id',(req,res)=>{
+    let obj = req.body
+    if(obj.name === "" || obj.name=== undefined){
+        res.send('please input you name')
+    }else if(obj.email === "" || obj.email === undefined){
+        res.send('please input your email')
+    }else if(obj.psw === "" || obj.psw === undefined){
+        res.send('plase input your password')
+    }else if(checkPassword(req.body.psw, req.session.Company.data.password)=== false){
+        res.send(`your password is incorrect`)
+    }else{
+        let data = {
+          password: getPassword(obj.newpsw)
+        
+        }
+        companyController.updatePassword(data,{where:{
+            id:req.params.id
+        }})
+        .then((data) => {
+            res.redirect('/companies/approve')
+        })
+        .catch((err)=>{
+            res.send(`error di updated company`)
+        })
+    }
+})
+
+routes.get('/approve', (req, res)=> {
+    res.render("listInvestors.ejs")
+})
 
 module.exports = routes

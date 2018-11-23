@@ -1,6 +1,7 @@
 const Model = require('../models/index')
 const Investor = Model.Investor
 const Company = Model.Company
+const Risk = Model.Risk
 const InvestsDetails = Model.InvestsDetail
 
 class investorController{
@@ -66,6 +67,19 @@ class investorController{
             })
         })
     }
+
+    static updatePassword(obj,where){
+        return new Promise((resolve,reject)=>{
+            Investor.update(obj,where)
+            .then((data)=>{
+                console.log(data, '+==============================================')
+                resolve(data)
+            })
+            .then((err)=>{
+                reject(err)
+            })
+        })
+     }
 
 }
 

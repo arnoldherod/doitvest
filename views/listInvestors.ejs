@@ -1,4 +1,4 @@
-<!-- <html>
+<html>
 <%- include ./partials/headers.ejs %>
 <%- include ./partials/navbar.ejs %>
 </head>
@@ -9,36 +9,17 @@
             <tr>
                 <th style="text-align: center">ID</th>
                 <th style="text-align: center">Your Name</th>
-                <th style="text-align: center">You Invested</th>
+                <th style="text-align: center">Amount Borrowed</th>
+                <th style="text-align: center">Options</th>
             </tr>
                 
             <tr>
-                <td style="text-align: center"><%= session.Investor.data.id %></td>
-                <td style="text-align: center"><%= session.Investor.data.name %></td>
-                <td style="text-align: center"><%= format$(session.Investor.data.invest) %></td>
+                <td style="text-align: center"><%= session.Company.data.id %></td>
+                <td style="text-align: center"><%= session.Company.data.name %></td>
+                <td style="text-align: center"><%= format$(session.Company.data.borrowed) %></td>
+                <td style="text-align: center"><a href="/companies/edit/<%= session.Company.data.id %>">Change Password</a></tr>
             </tr>
         </table>
 <% } %>
 <br>
 <br>
-<br>
-
-<table style="width: 100% ">
-    <tr>
-        <th style="text-align: center">No</th>
-        <th style="text-align: center">Company Name</th>
-        <th style="text-align: center">Amount Requested</th>
-        <th style="text-align: center">Options</th>
-    </tr>
-        
-        <% for(let iComp = 0 ; iComp<allCompanies.length ; iComp++) {%>
-    <tr>
-        <td style="text-align: center"><%= iComp+1 %></td>
-        <td style="text-align: center"><%= allCompanies[iComp].name %></td>
-        <td style="text-align: center"><%= format$(allCompanies[iComp].borrowed) %></td>
-        <th style="text-align: center"><a href="/investors/approve/<%= allCompanies[iComp].id %>">Approved</a></th>
-    </tr>
-    <% } %>
-</table>
-</body>
-</html> -->

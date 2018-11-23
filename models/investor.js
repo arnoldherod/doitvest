@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Investor.associate = function(models) {
     Investor.belongsTo(models.Risk, {foreignKey: "riskId"})
+    Investor.belongsToMany(models.Company, {through: "InvestsDetail", foreignKey: "investorId"})
   };
 
   Investor.beforeCreate((input, options) => {

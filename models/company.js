@@ -14,9 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {});
   Company.associate = function(models) {
-    // associations can be defined here
-  };
-
+    Company.belongsToMany(models.Investor, {through: "InvestsDetail", foreignKey: "companyId"})
+    };
   Company.beforeCreate((input, options) => {
     input.password = getPassword(input.password) 
   })

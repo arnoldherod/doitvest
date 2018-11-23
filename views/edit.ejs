@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ./partials/headers %>
+<body>
+    <% include ./partials/navbar %>
+        <form method="POST" action="/investors/edit/<%=session.Investor.data.id%>">
+            Name:<br>
+            <input type="text" name="name" value="<%=session.Investor.data.name%>" readonly>
+            <br>
+            Email:<br>
+            <input type="email" name="email" value="<%=session.Investor.data.email%>">
+            <br>
+            Password:<br>
+            <input type="password" name="psw" placeholder="insert your password">
+            <br>
+            New Password:<br>
+            <input type="password" name="newpsw" placeholder="insert your new password">
+            <br>
+           
+            <br>
+            <input type="submit" value="edit">
+          </form> 
+    
+</body>
+</html>
+
+
+
+Collapse 

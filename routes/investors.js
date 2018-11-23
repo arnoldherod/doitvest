@@ -2,7 +2,9 @@ let routes = require('express').Router()
 const riskController = require('../controllers/riskController')
 const investorController = require('../controllers/investorController')
 const companyController = require('../controllers/companyController')
-const {checkPassword} = require('../helpers/hashPassword')
+const Models = require('../models/')
+const Risk = Models.Risk
+const {checkPassword, getPassword} = require('../helpers/hashPassword')
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -17,14 +19,12 @@ var mailOptions = {
     from: 'gamecowo12345@gmail.com',
     to: 'arnold.herod@yahoo.co.id',
     subject: 'Confirmation Email from DoItVest',
-    text: 'Thank you for joining us as an Investor, This email proved your membership with our company!'
+    text: 'Congratulations! An Investor has found your proposal appealing, This email confirmed our partnership!'
 }
 
 
 routes.get('/', function(req, res){
-
-
-    res.render("Welcome Investor of DoItVest")
+    res.send("Welcome Investor of DoItVest")
 })
 
 routes.get('/signupinvestor',function(req,res){
@@ -64,7 +64,7 @@ routes.get('/profile', function(req,res){
 })
 
 routes.post('/signin', function(req,res){
-    investorController.findInvestor({where: {email: req.body.email}})
+    investorController.findInvestor({where: {email: req.body.email}}, {include: Risk})
     .then(data => {
         if(!data){
             let noEmail = "No Email Found"
@@ -128,6 +128,48 @@ routes.post('/approve', function(req,res){
         res.send("ERROR COI!!!!!!!! GRRAAAA")
     })
 })
+
+routes.get('/edit/:id',function (req,res){
+    res.render('edit.ejs')
+})
+
+routes.post('/edit/:id',(req,res)=>{
+    let obj = req.body
+    if(obj.name === "" || obj.name=== undefined){
+        res.send('please input your name')
+    }else if(obj.email === "" || obj.email === undefined){
+        res.send('please input your email')
+    }else if(obj.psw === "" || obj.psw === undefined){
+        res.send('plase input your password')
+    }else if(checkPassword(req.body.psw, req.session.Investor.data.password)=== false){
+        res.send(`your password is incorrect`)
+    }else{
+        let data = {
+          password: getPassword(obj.newpsw)
+        }
+        // res.send(data)
+        investorController.updatePassword(data,{where:{
+            id: req.params.id
+        }})
+        .then((data) => {
+            // res.send(data)
+            res.redirect('/investors/profile')
+        })
+        .catch((err)=>{
+            res.send(`error di updated investor`)
+        })
+    }
+})
+
+routes.get('/delete',((req,res) =>{
+        companyController.deleteCompany({where:{
+            id: req.query.cId
+        }})
+        .then(() =>{
+            res.redirect('/investors/profile')
+        })
+    })
+)
 
 
 module.exports = routes

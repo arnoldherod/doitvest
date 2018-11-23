@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     amount: DataTypes.INTEGER
   }, {});
   InvestsDetail.associate = function(models) {
-    // associations can be defined here
+    InvestsDetail.belongsTo(models.Investor, {through: "InvestsDetail", foreignKey: "investorId"})
+    InvestsDetail.belongsTo(models.Company, {through: "InvestsDetail", foreignKey: "companyId"})
   };
   return InvestsDetail;
 };
